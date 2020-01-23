@@ -15,8 +15,11 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.Ecommerce_Bd_ILT.Model.CartModel;
 import com.niit.Ecommerce_Bd_ILT.Model.CategoryModel;
 import com.niit.Ecommerce_Bd_ILT.Model.ProductModel;
+import com.niit.Ecommerce_Bd_ILT.Model.ShipModel;
+import com.niit.Ecommerce_Bd_ILT.Model.UserModel;
 
 
 @Configuration
@@ -53,6 +56,10 @@ public class AppConfig {
             //builder.scanPackages("com.niit.OnlineWebBackEnd");
           builder.addAnnotatedClass(ProductModel.class);
           builder.addAnnotatedClass(CategoryModel.class);
+          builder.addAnnotatedClass(UserModel.class);
+         builder.addAnnotatedClass(CartModel.class);
+       builder.addAnnotatedClass(ShipModel.class);
+          
           
             return builder.buildSessionFactory();
     }

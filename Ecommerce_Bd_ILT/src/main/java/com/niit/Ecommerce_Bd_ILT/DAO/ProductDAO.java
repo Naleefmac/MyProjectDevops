@@ -12,4 +12,6 @@ public interface ProductDAO
 			public List<ProductModel> getAll();
 			public List<ProductModel> getFilterProducts(int categoryid);
 			//public void update(ProductModel product);
+			public void update(ProductModel p);
+			public void delete(ProductModel p);
 }

@@ -15,16 +15,14 @@ import com.niit.Ecommerce_Bd_ILT.Model.ProductModel;
 @Repository
 public class ProductDAOImpl implements ProductDAO
 {
+	
 	@Autowired
 	private SessionFactory sessionFactory;
-	
 	
 	public void setSessionFactory(SessionFactory sf){
 		this.sessionFactory = sf;
 	}
-	
-	public void addProduct(ProductModel product) 
-	{
+	public void addProduct(ProductModel product) {
 		try
 		{
 		Session s=sessionFactory.openSession();
@@ -38,12 +36,14 @@ public class ProductDAOImpl implements ProductDAO
 			System.out.println(r);
 			r.printStackTrace();
 		}
+		
 	}
+
 	public ProductModel findById(int id) {
 		return (ProductModel)sessionFactory.openSession().get(ProductModel.class,id);
 	}
-	public List<ProductModel> getAll()
-	{
+
+	public List<ProductModel> getAll() {
 		Session s=sessionFactory.openSession();
 		s.beginTransaction();
 		Query query =s.createQuery("from ProductModel");        
@@ -52,13 +52,31 @@ public class ProductDAOImpl implements ProductDAO
 		s.getTransaction().commit();
 		return list;
 	}
-	public List<ProductModel> getFilterProducts(int categoryid)
-	{
-		Session s=sessionFactory.openSession();
+
+	public List<ProductModel> getFilterProducts(int categoryid) {
+Session s=sessionFactory.openSession();
 		
 		List<ProductModel> results =s.createQuery("from ProductModel where categoryid="+categoryid).list();
 		s.close();
-		// TODO Auto-generated method stub
 		return results;
 	}
+
+	public void update(ProductModel product) {
+
+		Session s=sessionFactory.openSession();
+		s.beginTransaction();
+		s.update(product);
+		s.getTransaction().commit();
+		s.close();
+		
 	}
+
+	public void delete(ProductModel p) {
+		Session s=sessionFactory.openSession();
+		s.beginTransaction();
+		s.delete(p);
+		s.getTransaction().commit();
+		s.close();sessionFactory.openSession().delete(p);
+		
+	}
+}
